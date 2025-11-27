@@ -1,0 +1,262 @@
+.catalog {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+    flex: 1;
+}
+
+.product {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    width: 220px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    min-height: 520px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.product:nth-child(1) { animation-delay: 0.1s; }
+.product:nth-child(2) { animation-delay: 0.2s; }
+.product:nth-child(3) { animation-delay: 0.3s; }
+.product:nth-child(4) { animation-delay: 0.4s; }
+.product:nth-child(5) { animation-delay: 0.5s; }
+.product:nth-child(6) { animation-delay: 0.6s; }
+
+.product::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(135deg, rgba(0, 210, 255, 0.03), rgba(58, 123, 213, 0.03));
+    transform: scale(0);
+    transition: transform 0.6s ease;
+}
+
+.product:hover::before {
+    transform: scale(1);
+}
+
+.product:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.12);
+}
+
+.product.selected {
+    border: 3px solid #00d2ff;;
+    box-shadow: 0 20px 50px rgba(26, 188, 156, 0.5);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 20px 50px rgba(26, 188, 156, 0.5);
+    }
+    50% {
+        box-shadow: 0 25px 60px rgba(26, 188, 156, 0.7);
+    }
+}
+
+.product img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    transition: all 0.5s ease;
+    position: relative;
+}
+
+.product:hover img {
+    transform: scale(1.1) rotate(3deg);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.product h3 {
+    font-size: 18px;
+    color: #2c3e50;
+    margin: 10px 0;
+    transition: all 0.3s ease;
+}
+
+.product:hover h3 {
+    color: #00d2ff;
+    transform: scale(1.05);
+}
+
+.product .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    font-size: 13px;
+    color: #7f8c8d;
+    margin: 8px 0;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+}
+
+.product:hover .description {
+    color: #2c3e50;
+}
+
+.product .price {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: auto; 
+    color: #3498db;
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.product:hover .price {
+    color: #00d2ff;;
+    transform: scale(1.1);
+}
+
+.buy-button {
+    background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: 600;
+    margin-top: 12px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(26, 188, 156, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.buy-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.buy-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.buy-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(26, 188, 156, 0.5);
+}
+
+.buy-button:active {
+    transform: translateY(0);
+}
+
+.buy-button.clicked {
+    animation: buttonPulse 0.4s ease;
+    background: linear-gradient(135deg, #00b894, #00cec9);
+}
+
+@keyframes buttonPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+}
+
+.hidden-products {
+    display: none;
+}
+
+.hidden-products.show {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+#show-more {
+    display: block;
+    margin: 30px auto;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    padding: 15px 35px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.4s ease;
+    text-align: center;
+    width: 180px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
+    position: relative;
+    overflow: hidden;
+    animation: bounceIn 0.8s ease-out;
+}
+
+#show-more::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: left 0.5s ease;
+}
+
+#show-more:hover::before {
+    left: 100%;
+}
+
+#show-more:hover {
+    background: linear-gradient(135deg, #2980b9, #3498db);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(52, 152, 219, 0.6);
+}
+
+#show-more:active {
+    transform: translateY(-2px);
+}
+
+.product::after {
+    content: 'NEW';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #e74c3c;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+}
+
+.product.new::after {
+    opacity: 1;
+    transform: scale(1);
+    animation: wiggle 1s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+}
